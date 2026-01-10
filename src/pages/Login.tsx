@@ -28,7 +28,6 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { toast } = useToast();
   const { login, isLoading, error, isAuthenticated, clearError } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -49,30 +48,20 @@ const Login = () => {
   const onSubmit = async (data: LoginFormValues) => {
     clearError();
     const success = await login(data.username, data.password);
-    
     if (success) {
-      toast({
-        title: 'Welcome back!',
-        description: 'You have successfully logged in.',
+      toast.success("Welcome back!", {
+        description: "You have successfully logged in.",
       });
       navigate(from, { replace: true });
     } else {
-      toast({
-        title: 'Login failed',
-        description: error || 'Invalid credentials. Please try again.',
-        variant: 'destructive',
+      toast.error("Login failed", {
+        description: error || "Invalid credentials. Please try again.",
       });
     }
   };
 
-  const fillDemoCredentials = () => {
-    form.setValue('username', 'emilys');
-    form.setValue('password', 'emilyspass');
-  };
-
   return (
     <div className="flex min-h-screen">
-      {/* Left side - Decorative */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -106,8 +95,6 @@ const Login = () => {
           </motion.p>
         </div>
       </motion.div>
-
-      {/* Right side - Login form */}
       <div className="flex w-full items-center justify-center p-8 lg:w-1/2">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -198,31 +185,6 @@ const Login = () => {
               </Button>
             </form>
           </Form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Demo credentials
-                </span>
-              </div>
-            </div>
-            <Button
-              type="button"
-              variant="outline"
-              className="mt-4 w-full"
-              onClick={fillDemoCredentials}
-            >
-              Use demo account
-            </Button>
-            <p className="mt-3 text-center text-xs text-muted-foreground">
-              Username: <code className="rounded bg-muted px-1">emilys</code> • 
-              Password: <code className="rounded bg-muted px-1">emilyspass</code>
-            </p>
-          </div>
         </motion.div>
       </div>
     </div>
