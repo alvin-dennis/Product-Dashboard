@@ -18,12 +18,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 import { useProduct } from '@/hooks/useProducts';
 import { useCartStore } from '@/stores/cartStore';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { toast } = useToast();
   const { data: product, isLoading, error } = useProduct(Number(id));
   const { addItem, openCart } = useCartStore();
   const [selectedImage, setSelectedImage] = useState(0);
@@ -40,9 +39,7 @@ const ProductDetail = () => {
         thumbnail: product.thumbnail,
       });
     }
-    
-    toast({
-      title: 'Added to cart',
+    toast.success('Added to cart', {
       description: `${quantity} × ${product.title}`,
     });
     openCart();
@@ -107,7 +104,6 @@ const ProductDetail = () => {
         </motion.div>
 
         <div className="grid gap-8 lg:grid-cols-2">
-          {/* Image Gallery */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,7 +142,6 @@ const ProductDetail = () => {
             )}
           </motion.div>
 
-          {/* Product Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
