@@ -54,7 +54,7 @@
     --gradient-primary: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(170 84% 32%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(160 20% 96%) 0%, hsl(170 30% 92%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(180 70% 35%) 50%, hsl(200 60% 40%) 100%);
-
+    
     --shadow-sm: 0 1px 2px 0 hsl(220 10% 10% / 0.03);
     --shadow-md: 0 4px 6px -1px hsl(220 10% 10% / 0.05), 0 2px 4px -2px hsl(220 10% 10% / 0.05);
     --shadow-lg: 0 10px 15px -3px hsl(220 10% 10% / 0.08), 0 4px 6px -4px hsl(220 10% 10% / 0.05);
@@ -117,12 +117,7 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold tracking-tight;
   }
 }
