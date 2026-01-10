@@ -91,7 +91,6 @@ export const ProductForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        {/* Image Upload */}
         <div className="space-y-2">
           <label className="text-sm font-medium">Product Image</label>
           <div className="flex items-center gap-4">

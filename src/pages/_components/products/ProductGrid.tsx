@@ -15,7 +15,6 @@ export const ProductGrid = () => {
 
     let products = [...data.products];
 
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       products = products.filter(
@@ -26,17 +25,14 @@ export const ProductGrid = () => {
       );
     }
 
-    // Filter by category
     if (selectedCategory !== 'all') {
       products = products.filter((p) => p.category === selectedCategory);
     }
 
-    // Filter by price range
     products = products.filter(
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
 
-    // Sort products
     switch (sortBy) {
       case 'price-asc':
         products.sort((a, b) => a.price - b.price);

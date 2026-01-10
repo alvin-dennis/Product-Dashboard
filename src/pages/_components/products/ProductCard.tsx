@@ -73,11 +73,11 @@ export const ProductCard = ({ product, index }: ProductCardProps) => {
                 {product.category}
               </span>
             </div>
-            
+
             <h3 className="line-clamp-1 font-medium transition-colors group-hover:text-primary">
               {product.title}
             </h3>
-            
+
             <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
               {product.description}
             </p>

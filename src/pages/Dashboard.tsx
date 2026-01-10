@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { TrendingUp, Package, ShoppingCart, DollarSign } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
-import { ProductFilters } from '@/components/products/ProductFilters';
-import { ProductGrid } from '@/components/products/ProductGrid';
+import { Layout } from '@/pages/_components/layout/Layout';
+import { ProductFilters } from '@/pages/_components/products/ProductFilters';
+import { ProductGrid } from '@/pages/_components/products/ProductGrid';
 import { Card, CardContent } from '@/components/ui/card';
 import { useProducts } from '@/hooks/useProducts';
 import { useCartStore } from '@/stores/cartStore';
@@ -56,7 +56,6 @@ const Dashboard = () => {
           </p>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,11 +83,7 @@ const Dashboard = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Filters */}
         <ProductFilters />
-
-        {/* Product Grid */}
         <ProductGrid />
       </div>
     </Layout>

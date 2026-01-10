@@ -21,42 +21,56 @@ interface ProductsResponse {
   limit: number;
 }
 
+
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not defined");
+}
+
+const api = (path: string) => `${API_URL}${path}`;
+
 const fetchProducts = async (): Promise<ProductsResponse> => {
-  const response = await fetch('https://dummyjson.com/products?limit=100');
+  const response = await fetch(api("/products?limit=100"));
   if (!response.ok) {
-    throw new Error('Failed to fetch products');
+    throw new Error("Failed to fetch products");
   }
   return response.json();
 };
 
 const fetchProductById = async (id: number): Promise<Product> => {
-  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  const response = await fetch(api(`/products/${id}`));
   if (!response.ok) {
-    throw new Error('Failed to fetch product');
+    throw new Error("Failed to fetch product");
   }
   return response.json();
 };
 
 const fetchCategories = async (): Promise<string[]> => {
-  const response = await fetch('https://dummyjson.com/products/category-list');
+  const response = await fetch(api("/products/category-list"));
   if (!response.ok) {
-    throw new Error('Failed to fetch categories');
+    throw new Error("Failed to fetch categories");
   }
   return response.json();
 };
 
 const searchProducts = async (query: string): Promise<ProductsResponse> => {
-  const response = await fetch(`https://dummyjson.com/products/search?q=${query}`);
+  const response = await fetch(
+    api(`/products/search?q=${encodeURIComponent(query)}`)
+  );
   if (!response.ok) {
-    throw new Error('Failed to search products');
+    throw new Error("Failed to search products");
   }
   return response.json();
 };
 
-const fetchProductsByCategory = async (category: string): Promise<ProductsResponse> => {
-  const response = await fetch(`https://dummyjson.com/products/category/${category}`);
+const fetchProductsByCategory = async (
+  category: string
+): Promise<ProductsResponse> => {
+  const response = await fetch(api(`/products/category/${category}`));
   if (!response.ok) {
-    throw new Error('Failed to fetch products by category');
+    throw new Error("Failed to fetch products by category");
   }
   return response.json();
 };

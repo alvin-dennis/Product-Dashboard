@@ -69,7 +69,6 @@ export const ProductFilters = () => {
             </SelectContent>
           </Select>
 
-          {/* Price Range Filter */}
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" className="w-[160px] justify-start">
@@ -126,7 +125,7 @@ export const ProductFilters = () => {
           className="flex flex-wrap items-center gap-2"
         >
           <span className="text-sm text-muted-foreground">Active filters:</span>
-          
+
           {searchQuery && (
             <Badge variant="secondary" className="gap-1">
               Search: "{searchQuery}"
@@ -135,7 +134,7 @@ export const ProductFilters = () => {
               </button>
             </Badge>
           )}
-          
+
           {selectedCategory !== 'all' && (
             <Badge variant="secondary" className="gap-1 capitalize">
               {selectedCategory.replace('-', ' ')}
@@ -144,14 +143,14 @@ export const ProductFilters = () => {
               </button>
             </Badge>
           )}
-          
+
           {sortBy !== 'default' && (
             <Badge variant="secondary" className="gap-1">
               {sortBy === 'price-asc'
                 ? 'Price ↑'
                 : sortBy === 'price-desc'
-                ? 'Price ↓'
-                : 'Top Rated'}
+                  ? 'Price ↓'
+                  : 'Top Rated'}
               <button onClick={() => setSortBy('default')}>
                 <X className="h-3 w-3" />
               </button>

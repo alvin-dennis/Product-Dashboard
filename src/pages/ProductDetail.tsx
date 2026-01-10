@@ -11,7 +11,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { useState } from 'react';
-import { Layout } from '@/components/layout/Layout';
+import { Layout } from '@/pages/_components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -30,7 +30,7 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
-    
+
     for (let i = 0; i < quantity; i++) {
       addItem({
         id: product.id,
@@ -125,11 +125,10 @@ const ProductDetail = () => {
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${
-                      selectedImage === index
-                        ? 'border-primary'
-                        : 'border-border hover:border-primary/50'
-                    }`}
+                    className={`h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${selectedImage === index
+                      ? 'border-primary'
+                      : 'border-border hover:border-primary/50'
+                      }`}
                   >
                     <img
                       src={image}
@@ -166,11 +165,10 @@ const ProductDetail = () => {
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`h-5 w-5 ${
-                      i < Math.floor(product.rating)
-                        ? 'fill-warning text-warning'
-                        : 'fill-muted text-muted'
-                    }`}
+                    className={`h-5 w-5 ${i < Math.floor(product.rating)
+                      ? 'fill-warning text-warning'
+                      : 'fill-muted text-muted'
+                      }`}
                   />
                 ))}
               </div>

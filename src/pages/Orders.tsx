@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { Package, ChevronRight } from 'lucide-react';
+import { Package } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Layout } from '@/pages/_components/layout/Layout';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useOrderStore } from '@/stores/orderStore';

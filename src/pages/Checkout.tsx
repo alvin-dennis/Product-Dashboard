@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Check, CreditCard, Truck, Package, ArrowLeft } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
+import { Layout } from '@/pages/_components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -100,12 +100,12 @@ const Checkout = () => {
 
   const handlePaymentSubmit = async (_data: PaymentData) => {
     if (!shippingData) return;
-    
+
     setIsProcessing(true);
-    
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      
+
       const id = addOrder({
         items: [...items],
         total: totalPrice,
@@ -117,7 +117,7 @@ const Checkout = () => {
           country: shippingData.country,
         },
       });
-      
+
       setOrderId(id);
       clearCart();
       setCurrentStep(2);
@@ -152,11 +152,10 @@ const Checkout = () => {
               <div key={step.id} className="flex items-center">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                      index <= currentStep
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground'
-                    }`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors ${index <= currentStep
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground'
+                      }`}
                   >
                     {index < currentStep ? (
                       <Check className="h-5 w-5" />
@@ -165,18 +164,16 @@ const Checkout = () => {
                     )}
                   </div>
                   <span
-                    className={`mt-2 text-sm font-medium ${
-                      index <= currentStep ? 'text-primary' : 'text-muted-foreground'
-                    }`}
+                    className={`mt-2 text-sm font-medium ${index <= currentStep ? 'text-primary' : 'text-muted-foreground'
+                      }`}
                   >
                     {step.title}
                   </span>
                 </div>
                 {index < steps.length - 1 && (
                   <div
-                    className={`mx-4 h-0.5 w-16 transition-colors ${
-                      index < currentStep ? 'bg-primary' : 'bg-muted'
-                    }`}
+                    className={`mx-4 h-0.5 w-16 transition-colors ${index < currentStep ? 'bg-primary' : 'bg-muted'
+                      }`}
                   />
                 )}
               </div>
@@ -403,7 +400,7 @@ const Checkout = () => {
                   </Card>
                 </motion.div>
               )}
-              
+
               {currentStep === 2 && orderId && (
                 <motion.div
                   key="confirmation"
@@ -420,19 +417,19 @@ const Checkout = () => {
                       >
                         <Check className="h-10 w-10 text-success" />
                       </motion.div>
-                      
+
                       <h2 className="mt-6 font-display text-2xl font-bold">
                         Order Confirmed!
                       </h2>
                       <p className="mt-2 text-muted-foreground">
                         Thank you for your purchase
                       </p>
-                      
+
                       <div className="mt-6 rounded-lg bg-muted/50 p-4">
                         <p className="text-sm text-muted-foreground">Order ID</p>
                         <p className="font-mono text-lg font-semibold">{orderId}</p>
                       </div>
-                      
+
                       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
                         <Button onClick={() => navigate('/orders')}>
                           View Orders

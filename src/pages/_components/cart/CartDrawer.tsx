@@ -144,7 +144,7 @@ export const CartDrawer = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Button 
+                      <Button
                         className="w-full btn-primary-shadow"
                         onClick={handleCheckout}
                       >

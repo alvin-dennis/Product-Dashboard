@@ -21,6 +21,12 @@ interface AuthState {
   clearError: () => void;
 }
 
+const AUTH_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!AUTH_URL) {
+  throw new Error("API URL is not defined");
+}
+
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -33,9 +39,9 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
         
         try {
-          const response = await fetch('https://dummyjson.com/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+          const response = await fetch(`${AUTH_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password }),
           });
 

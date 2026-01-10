@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit, Trash2, Package, Search } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
-import { ProductForm, ProductFormData } from '@/components/admin/ProductForm';
+import { Layout } from '@/pages/_components/layout/Layout';
+import { ProductForm, ProductFormData } from '@/pages/_components/admin/ProductForm';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,7 +39,7 @@ import { toast } from 'sonner';
 const Admin = () => {
   const { data: apiProducts } = useProducts();
   const { localProducts, addProduct, updateProduct, deleteProduct } = useProductStore();
-  
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
@@ -48,7 +48,7 @@ const Admin = () => {
 
   // Combine API products with local products
   const allProducts = [...(localProducts || []), ...(apiProducts?.products || [])];
-  
+
   const filteredProducts = allProducts.filter((p) =>
     p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     p.brand?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -66,10 +66,10 @@ const Admin = () => {
 
   const handleSubmit = async (data: ProductFormData, imagePreview: string | null) => {
     setIsSubmitting(true);
-    
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      
+
       const productData = {
         title: data.title,
         description: data.description,
@@ -82,10 +82,10 @@ const Admin = () => {
         thumbnail: imagePreview || 'https://via.placeholder.com/400',
         images: imagePreview ? [imagePreview] : ['https://via.placeholder.com/400'],
       };
-      
+
       if (editingProduct) {
         const isLocal = localProducts.some((p) => p.id === editingProduct.id);
-        
+
         if (isLocal) {
           updateProduct(editingProduct.id, productData);
         } else {
@@ -96,7 +96,7 @@ const Admin = () => {
         addProduct(productData);
         toast.success('Product created successfully');
       }
-      
+
       setIsFormOpen(false);
       setEditingProduct(null);
     } catch (error) {
@@ -108,14 +108,14 @@ const Admin = () => {
 
   const handleDelete = (id: number) => {
     const isLocal = localProducts.some((p) => p.id === id);
-    
+
     if (isLocal) {
       deleteProduct(id);
       toast.success('Product deleted successfully');
     } else {
       toast.error('Cannot delete API products. You can only delete locally created products.');
     }
-    
+
     setDeleteConfirm(null);
   };
 
@@ -138,8 +138,6 @@ const Admin = () => {
             Add Product
           </Button>
         </motion.div>
-
-        {/* Stats Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -180,8 +178,6 @@ const Admin = () => {
             </CardContent>
           </Card>
         </motion.div>
-
-        {/* Search */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -198,8 +194,6 @@ const Admin = () => {
             />
           </div>
         </motion.div>
-
-        {/* Products Table */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -228,7 +222,7 @@ const Admin = () => {
                     <AnimatePresence mode="popLayout">
                       {filteredProducts.slice(0, 20).map((product) => {
                         const isLocal = localProducts.some((p) => p.id === product.id);
-                        
+
                         return (
                           <motion.tr
                             key={product.id}
@@ -292,7 +286,7 @@ const Admin = () => {
                   </TableBody>
                 </Table>
               </div>
-              
+
               {filteredProducts.length > 20 && (
                 <p className="mt-4 text-center text-sm text-muted-foreground">
                   Showing 20 of {filteredProducts.length} products
@@ -301,8 +295,6 @@ const Admin = () => {
             </CardContent>
           </Card>
         </motion.div>
-
-        {/* Product Form Dialog */}
         <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
           <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
             <DialogHeader>
@@ -323,8 +315,6 @@ const Admin = () => {
             />
           </DialogContent>
         </Dialog>
-
-        {/* Delete Confirmation */}
         <AlertDialog open={deleteConfirm !== null} onOpenChange={() => setDeleteConfirm(null)}>
           <AlertDialogContent>
             <AlertDialogHeader>
