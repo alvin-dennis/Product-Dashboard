@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit, Trash2, Package, Search } from 'lucide-react';
-import { Layout } from '@/pages/_components/layout/Layout';
-import { ProductForm, ProductFormData } from '@/pages/_components/admin/ProductForm';
+import { Layout } from '@/modules/layout/Layout';
+import { ProductForm, ProductFormData } from '@/modules/admin/_components/ProductForm';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

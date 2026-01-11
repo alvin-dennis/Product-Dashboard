@@ -1,5 +1,5 @@
 import { Header } from './Header';
-import { CartDrawer } from '@/pages/_components/cart/CartDrawer';
+import { CartDrawer } from '@/modules/cart/CartDrawer';
 
 interface LayoutProps {
   children: React.ReactNode;

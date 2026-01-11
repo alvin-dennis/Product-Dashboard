@@ -1,17 +1,18 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuthStore } from '@/stores/authStore';
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuthStore } from "@/stores/authStore";
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { isAuthenticated } = useAuthStore();
+export const ProtectedRoute = () => {
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const location = useLocation();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={{ from: location }}
+      />
+    );
   }
-
-  return <>{children}</>;
+  return <Outlet />;
 };

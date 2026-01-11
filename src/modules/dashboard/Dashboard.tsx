@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { TrendingUp, Package, ShoppingCart, DollarSign } from 'lucide-react';
-import { Layout } from '@/pages/_components/layout/Layout';
-import { ProductFilters } from '@/pages/_components/products/ProductFilters';
-import { ProductGrid } from '@/pages/_components/products/ProductGrid';
+import { Layout } from '@/modules/layout/Layout';
+import { ProductFilters } from '@/modules/dashboard/_components/ProductFilters';
+import { ProductGrid } from '@/modules/dashboard/_components/ProductGrid';
 import { Card, CardContent } from '@/components/ui/card';
 import { useProducts } from '@/hooks/useProducts';
 import { useCartStore } from '@/stores/cartStore';

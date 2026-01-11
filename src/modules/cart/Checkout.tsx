@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Check, CreditCard, Truck, Package, ArrowLeft } from 'lucide-react';
-import { Layout } from '@/pages/_components/layout/Layout';
+import { Layout } from '@/modules/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -141,7 +141,6 @@ const Checkout = () => {
           Back
         </Button>
 
-        {/* Progress Steps */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -182,10 +181,8 @@ const Checkout = () => {
         </motion.div>
 
         <div className="grid gap-8 lg:grid-cols-3">
-          {/* Main Content */}
           <div className="lg:col-span-2">
             <AnimatePresence mode="wait">
-              {/* Shipping Step */}
               {currentStep === 0 && (
                 <motion.div
                   key="shipping"
@@ -288,8 +285,6 @@ const Checkout = () => {
                   </Card>
                 </motion.div>
               )}
-
-              {/* Payment Step */}
               {currentStep === 1 && (
                 <motion.div
                   key="payment"

@@ -11,7 +11,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { useState } from 'react';
-import { Layout } from '@/pages/_components/layout/Layout';
+import { Layout } from '@/modules/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';

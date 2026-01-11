@@ -21,10 +21,10 @@ interface AuthState {
   clearError: () => void;
 }
 
-const AUTH_URL = process.env.NEXT_PUBLIC_API_URL;
+const AUTH_URL = import.meta.env.VITE_API_URL;
 
 if (!AUTH_URL) {
-  throw new Error("API URL is not defined");
+  throw new Error("VITE_API_URL is not defined");
 }
 
 export const useAuthStore = create<AuthState>()(

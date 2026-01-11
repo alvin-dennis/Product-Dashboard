@@ -1,70 +1,46 @@
+import { Suspense, lazy, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import ProductDetail from "./pages/ProductDetail";
-import Admin from "./pages/Admin";
-import Checkout from "./pages/Checkout";
-import Orders from "./pages/Orders";
-import NotFound from "./pages/NotFound";
+import NotFound from "./components/NotFound";
+import Loader from "./components/Loader";
 
-const queryClient = new QueryClient();
+const Login = lazy(() => import("./modules/auth/Login"));
+const Dashboard = lazy(() => import("./modules/dashboard/Dashboard"));
+const ProductDetail = lazy(() => import("./modules/cart/ProductDetail"));
+const Admin = lazy(() => import("./modules/admin/Admin"));
+const Checkout = lazy(() => import("./modules/cart/Checkout"));
+const Orders = lazy(() => import("./modules/cart/Orders"));
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster position="top-right" richColors />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/product/:id"
-            element={
-              <ProtectedRoute>
-                <ProductDetail />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <ProtectedRoute>
-                <Checkout />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <ProtectedRoute>
-                <Orders />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [queryClient] = useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster position="top-right" richColors />
+        <BrowserRouter>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+
+              <Route element={<ProtectedRoute />}>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/orders" element={<Orders />} />
+              </Route>
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
